@@ -50,11 +50,22 @@ public class CommunityServiceImpl implements CommunityService{
 	public Community updateCommunity(Community community) {
 		logger.info("Updating Community : {}",community);
 		Optional<Community> communityUpdate = communityRepo.findById(community.getCommunityId());
-		Community communityTemp = communityUpdate.get();
-		communityTemp.setCommunityName(community.getCommunityName());
-		communityTemp.setCommunityDescription(community.getCommunityDescription());
-		communityTemp = communityRepo.save(communityTemp);
-		logger.info("Updated Community : {}",communityTemp);
+			public Community updateCommunity(Community community) {
+		logger.info("Updating Community : {}",community);
+		Optional<Community> communityUpdate = communityRepo.findById(community.getCommunityId());
+		Community communityTemp =null;
+		if(communityUpdate.isPresent()) {
+					communityTemp = communityUpdate.get();
+					communityTemp.setCommunityName(community.getCommunityName());
+					communityTemp.setCommunityDescription(community.getCommunityDescription());
+					communityTemp = communityRepo.save(communityTemp);
+					logger.info("Updated Community : {}",communityTemp);
+		}
+//		Community communityTemp = communityUpdate.isPresent()
+//		communityTemp.setCommunityName(community.getCommunityName());
+//		communityTemp.setCommunityDescription(community.getCommunityDescription());
+//		communityTemp = communityRepo.save(communityTemp);
+//		logger.info("Updated Community : {}",communityTemp);
 		return communityTemp;
 	}
 	
